@@ -14,6 +14,7 @@ const DiaryEditor = ({ onCreate }) => {
     emotion: 1,
   });
 
+  // 작성 완료 클릭 시
   const handleSubmit = () => {
     onCreate({
       ...diary,
@@ -23,6 +24,7 @@ const DiaryEditor = ({ onCreate }) => {
       emotion: 1,
     });
   };
+
   return (
     <div className="DiaryEditor">
       <button

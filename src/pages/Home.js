@@ -12,9 +12,10 @@ const Home = () => {
   // useNavigate
   const navigate = useNavigate();
 
-  // useContext
+  // 전역에 있는 memberList 가져오기
   const memberList = useContext(MemberStateContext);
 
+  // 로그인 클릭 시 핸들러
   const handleLogin = () => {
     console.log(memberList);
     memberList.map((it) => {

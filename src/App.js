@@ -48,6 +48,7 @@ const dummyData = [
 export const MemberStateContext = React.createContext();
 export const MemberDispatcherContext = React.createContext();
 
+// memberList 관리하는 dispatch
 function reducer(state, action) {
   let newState = [];
   switch (action.type) {
@@ -66,8 +67,11 @@ function reducer(state, action) {
 }
 
 function App() {
+  // memberList reducer
+  // 초기화 시 더미데이터 가져오기
   const [state, dispatch] = useReducer(reducer, dummyData);
 
+  // Mount 시에 localStorage에 있는 데이터 가져오기
   useEffect(() => {
     const localMemberData = localStorage.getItem("memberList");
     if (localMemberData) {
@@ -78,6 +82,7 @@ function App() {
     }
   }, []);
 
+  // 회원가입 기능
   const onCreate = useCallback((member) => {
     dispatch({
       type: "CREATE",

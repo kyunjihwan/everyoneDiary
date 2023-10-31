@@ -16,7 +16,7 @@ const Join = () => {
   // useNavigate
   const navigate = useNavigate();
 
-  // useContext
+  // 전역에 있는 회원가입 메소드 가져오기
   const { onCreate } = useContext(MemberDispatcherContext);
 
   // 회원가입 버튼 핸들러
