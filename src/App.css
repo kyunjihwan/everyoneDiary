@@ -71,22 +71,26 @@ textarea {
   border: 1px solid gray;
   text-align: center;
   padding: 20px;
+}
+
+/* Login */
+.Login {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.Home input {
+.Login input {
   margin-top: 5px;
   width: 200px;
   height: 20px;
 }
 
-.Home button {
+.Login button {
   width: 100px;
 }
 
-.Home .btn-area {
+.Login .btn-area {
   width: 218px;
   padding-top: 10px;
   display: flex;

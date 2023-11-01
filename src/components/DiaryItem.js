@@ -13,7 +13,7 @@ const DiaryItem = ({ diary }) => {
   const { onRemove, onEdit } = useContext(DiaryMethodContext);
 
   // 수정할 content 상태
-  const [editContent, setEditContent] = useState(diary.content);
+  const [newContent, setEditContent] = useState(diary.content);
 
   // 일기 삭제 버튼 클릭 시 핸들러
   const handleRemove = () => {
@@ -22,7 +22,7 @@ const DiaryItem = ({ diary }) => {
 
   // 일기 수정 완료 버튼 클릭 시 핸들러
   const handleEdit = () => {
-    onEdit(editContent, diary.id);
+    onEdit(newContent, diary.id);
     setIsEdit(!isEdit);
   };
 
@@ -38,7 +38,7 @@ const DiaryItem = ({ diary }) => {
         <div>{diary.author}</div>
         {isEdit ? (
           <textarea
-            value={editContent}
+            value={newContent}
             onChange={(e) => {
               setEditContent(e.target.value);
             }}

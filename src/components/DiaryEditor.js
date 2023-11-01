@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { MemberStateContext } from "../App";
+import { DiaryMethodContext } from "../pages/Diary";
 
-const DiaryEditor = ({ onCreate }) => {
+const DiaryEditor = () => {
+  // useNavigate
   const navigate = useNavigate();
+
+  // useContext에서 onCreate 함수 가져오기
+  const { onCreate } = useContext(DiaryMethodContext);
+
   // 로컬 storage에서 데이터 가져오기
   const member = JSON.parse(localStorage.getItem("member"));
 

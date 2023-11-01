@@ -1,65 +1,26 @@
-import { useState, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { MemberStateContext } from "../App";
+import { useState, useRef, useContext, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import HomeLogin from "../components/HomeLogin";
+import HomeMenu from "../components/HomeMenu";
+import { LoginMemberStateContext } from "../App";
 
 const Home = () => {
-  // 로그인 state
-  const [login, setLogin] = useState({
-    id: "",
-    password: "",
-  });
+  // 로그인 확인
+  const [isLogin, setIsLogin] = useState(false);
 
-  // useNavigate
-  const navigate = useNavigate();
+  // useContext에 있는 member 데이터 가져오기
+  const loginMember = useContext(LoginMemberStateContext);
 
-  // 전역에 있는 memberList 가져오기
-  const memberList = useContext(MemberStateContext);
+  useEffect(() => {
+    if (loginMember) {
+      setIsLogin(true);
+    }
+  }, []);
 
-  // 로그인 클릭 시 핸들러
-  const handleLogin = () => {
-    console.log(memberList);
-    memberList.map((it) => {
-      if (it.id === login.id) {
-        if (parseInt(it.password) === parseInt(login.password)) {
-          localStorage.setItem("member", JSON.stringify(it));
-          navigate("/diary");
-        }
-      }
-    });
-  };
   return (
     <div className="Home">
       <h2>Home</h2>
-      <input
-        type="text"
-        value={login.id}
-        onChange={(e) => {
-          setLogin({
-            ...login,
-            id: e.target.value,
-          });
-        }}
-      />
-      <input
-        type="password"
-        value={login.password}
-        onChange={(e) => {
-          setLogin({
-            ...login,
-            password: e.target.value,
-          });
-        }}
-      />
-      <div className="btn-area">
-        <button onClick={handleLogin}>로그인</button>
-        <button
-          onClick={() => {
-            navigate("/join");
-          }}
-        >
-          회원가입
-        </button>
-      </div>
+      {isLogin ? <HomeMenu /> : <HomeLogin />}
     </div>
   );
 };
