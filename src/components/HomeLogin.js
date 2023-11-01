@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { MemberStateContext } from "../App";
+import { LoginMemberDispatcherContext, MemberStateContext } from "../App";
 
 const HomeLogin = () => {
-  // 로그인 state
-  const [login, setLogin] = useState({
+  // 로그인 input state
+  const [loginData, setLogin] = useState({
     id: "",
     password: "",
   });
@@ -14,37 +14,30 @@ const HomeLogin = () => {
 
   // 전역에 있는 memberList 가져오기
   const memberList = useContext(MemberStateContext);
+  const { login } = useContext(LoginMemberDispatcherContext);
 
   // 로그인 클릭 시 핸들러
   const handleLogin = () => {
-    console.log(memberList);
-    memberList.map((it) => {
-      if (it.id === login.id) {
-        if (parseInt(it.password) === parseInt(login.password)) {
-          localStorage.setItem("member", JSON.stringify(it));
-          navigate("/diary");
-        }
-      }
-    });
+    login(memberList, loginData);
   };
   return (
-    <div className="Login">
+    <div className="HomeLogin">
       <input
         type="text"
-        value={login.id}
+        value={loginData.id}
         onChange={(e) => {
           setLogin({
-            ...login,
+            ...loginData,
             id: e.target.value,
           });
         }}
       />
       <input
         type="password"
-        value={login.password}
+        value={loginData.password}
         onChange={(e) => {
           setLogin({
-            ...login,
+            ...loginData,
             password: e.target.value,
           });
         }}
